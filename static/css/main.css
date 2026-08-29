@@ -1,0 +1,294 @@
+/* ============================================================================
+   HajibagheriLabs — landing stylesheet.
+   Built ON TOP OF the reference token sheet (static/css/variables.css), which
+   is imported VERBATIM and linked BEFORE this file. Token names are never
+   renamed here — this file only adds a few semantic tokens (--hairline,
+   --success, --danger) and a Persian font stack.
+
+   Aesthetic: pure --color-void canvas, ONE plum-voltage accent, bone type that
+   glows, 1px hairlines, generous void. NO shadows/gradients/panels/elevation.
+   RTL-first, Persian (Vazirmatn). Mobile-first.
+   ========================================================================== */
+
+/* ---- Fonts: Vazirmatn (Persian/UI) self-hosted + CDN fallback ------------- */
+/* TODO: if you re-pin Vazirmatn, update the local files in /static/fonts AND
+   the @v33.003 tag in the jsDelivr fallback URLs below. */
+@font-face {
+  font-family: "Vazirmatn"; font-style: normal; font-weight: 100; font-display: swap;
+  src: url("../fonts/Vazirmatn-Thin.woff2") format("woff2"),
+       url("https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Thin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Vazirmatn"; font-style: normal; font-weight: 200; font-display: swap;
+  src: url("../fonts/Vazirmatn-ExtraLight.woff2") format("woff2"),
+       url("https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-ExtraLight.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Vazirmatn"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("../fonts/Vazirmatn-Regular.woff2") format("woff2"),
+       url("https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Vazirmatn"; font-style: normal; font-weight: 600; font-display: swap;
+  src: url("../fonts/Vazirmatn-SemiBold.woff2") format("woff2"),
+       url("https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-SemiBold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Vazirmatn"; font-style: normal; font-weight: 700; font-display: swap;
+  src: url("../fonts/Vazirmatn-Bold.woff2") format("woff2"),
+       url("https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2") format("woff2");
+}
+
+/* ---- Space Grotesk — LATIN ONLY, for the "HajibagheriLabs" wordmark --------------- */
+@font-face {
+  font-family: "Space Grotesk"; font-style: normal; font-weight: 500; font-display: swap;
+  src: url("../fonts/SpaceGrotesk-Medium.woff2") format("woff2"),
+       url("https://cdn.jsdelivr.net/npm/@fontsource/space-grotesk@5.0.18/files/space-grotesk-latin-500-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Space Grotesk"; font-style: normal; font-weight: 700; font-display: swap;
+  src: url("../fonts/SpaceGrotesk-Bold.woff2") format("woff2"),
+       url("https://cdn.jsdelivr.net/npm/@fontsource/space-grotesk@5.0.18/files/space-grotesk-latin-700-normal.woff2") format("woff2");
+}
+
+/* ---- Added semantic tokens ------------------------------------------------ */
+:root {
+  --hairline: rgba(255, 255, 255, 0.10);
+  --success: #3fb950;
+  --danger: #e5484d;
+  /* Persian UI font stack (the reference's --font-acronym never ships, so
+     Vazirmatn leads and the token's generic fallbacks trail). */
+  --font-fa: "Vazirmatn", var(--font-acronym);
+  --font-latin: "Space Grotesk", var(--font-acronym);
+}
+
+
+/* ---- Reset ---------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  background: var(--color-void);
+  color: var(--color-bone);
+  font-family: var(--font-fa);
+  font-weight: var(--font-weight-regular);
+  font-size: 15px;
+  line-height: var(--leading-body-sm);
+  letter-spacing: 0;                 /* PERSIAN: zero tracking on connected script */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+}
+
+img, svg, video { display: block; max-width: 100%; }
+a { color: var(--color-plum-voltage); text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+ul { list-style: none; }
+
+:focus-visible {
+  outline: 2px solid var(--color-plum-voltage);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ---- Type scale. Persian => tracking 0; clamp() shrinks the
+        big display/hero sizes on small screens. ----------------------------- */
+.t-hero {
+  font-size: clamp(46px, 11vw, var(--text-hero));
+  line-height: var(--leading-hero);
+  font-weight: var(--font-weight-extralight);
+  letter-spacing: 0;
+}
+.t-display {
+  font-size: clamp(40px, 8vw, var(--text-display));
+  line-height: var(--leading-display);
+  font-weight: var(--font-weight-extralight);
+  letter-spacing: 0;
+}
+.t-heading-lg {
+  font-size: clamp(32px, 6vw, var(--text-heading-lg));
+  line-height: var(--leading-heading-lg);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: 0;
+}
+.t-heading {
+  font-size: clamp(28px, 4.4vw, var(--text-heading));
+  line-height: var(--leading-heading);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: 0;
+}
+.t-heading-sm {
+  font-size: var(--text-heading-sm);
+  line-height: var(--leading-heading-sm);
+  font-weight: var(--font-weight-semibold);
+}
+.t-subheading {
+  font-size: var(--text-subheading);
+  line-height: var(--leading-subheading);
+  font-weight: var(--font-weight-regular);
+}
+.t-body { font-size: 15px; line-height: var(--leading-subheading); font-weight: var(--font-weight-regular); }
+.t-body-sm { font-size: var(--text-body-sm); line-height: var(--leading-body-sm); }
+.t-caption { font-size: var(--text-caption); line-height: var(--leading-caption); letter-spacing: 0.02em; }
+
+.muted { color: var(--color-ash); }
+.dim { color: var(--color-smoke); }
+p { max-width: 60ch; }
+
+/* Eyebrow / kicker — Persian: NO uppercase (size + accent + small tracking). */
+.eyebrow {
+  display: inline-block;
+  font-size: var(--text-body-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.04em;            /* small positive is OK on Persian */
+  color: var(--color-plum-voltage);
+  margin-bottom: var(--spacing-12);
+}
+
+.eyebrow--danger { color: var(--danger); }
+
+/* Latin-only display — the ONLY place negative tracking lives. */
+.wordmark {
+  font-family: var(--font-latin);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* ---- Layout --------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--page-max-width);
+  margin-inline: auto;
+  padding-inline: var(--spacing-24);
+}
+
+.skip-link {
+  position: absolute;
+  inset-inline-start: var(--spacing-18);
+  top: -60px;
+  background: var(--color-plum-voltage);
+  color: var(--color-bone);
+  padding: var(--spacing-12) var(--spacing-18);
+  border-radius: var(--radius-buttons);
+  transition: top 0.2s ease;
+  z-index: 200;
+}
+.skip-link:focus { top: var(--spacing-12); }
+
+/* ---- Buttons -------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-6);
+  font-family: var(--font-fa);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--text-body-sm);
+  line-height: 1;
+  padding: 14px 24px;
+  border-radius: var(--radius-buttons);   /* 24px — pill geometry */
+  border: 1px solid transparent;
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+  white-space: nowrap;
+}
+/* The ONE filled chromatic surface in the whole UI. */
+.btn-voltage {
+  background: var(--color-plum-voltage);
+  color: var(--color-bone);
+  border-color: var(--color-plum-voltage);
+}
+.btn-voltage:hover { background: #6a3df0; border-color: #6a3df0; }
+
+/* ---- Header --------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: saturate(140%) blur(10px);
+  border-bottom: 1px solid var(--hairline);
+}
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-24);
+  min-height: 68px;
+}
+/* Wordmark on the RIGHT in RTL (it's first in the DOM). */
+.brand { display: inline-flex; align-items: baseline; gap: 8px; color: var(--color-bone); }
+.brand .wordmark { font-size: var(--text-subheading); }
+
+/* ---- Homepage 3D constellation (the ONE animated experience) -------------- */
+/* The canvas is fixed behind all content (z-index:-1, sits above the void
+   background but under every section). Sections are transparent so the
+   particle field shows through; text/CTA render with or without WebGL. */
+.constellation { position: relative; }
+.constellation__canvas {
+  position: fixed; inset: 0;
+  width: 100vw; height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+}
+.constellation__canvas.is-paused { visibility: hidden; }
+
+.cstl-section {
+  position: relative;
+  z-index: 1;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-block: var(--section-gap);
+}
+
+/* Text fades/translates are driven inline by JS; default visible (fallback). */
+.cstl-text { opacity: 1; }
+
+/* Hero — RTL 50/50: text RIGHT, constellation LEFT (edge-to-edge behind). */
+.cstl-hero__inner { display: grid; grid-template-columns: 1fr; gap: var(--spacing-36); width: 100%; }
+.cstl-hero__text { display: flex; flex-direction: column; }
+.cstl-hero__text .t-hero { margin-bottom: var(--spacing-18); }
+.cstl-hero__lead { color: var(--color-ash); margin-bottom: var(--spacing-30); max-width: 46ch; }
+.cstl-hero__cta { display: flex; flex-wrap: wrap; gap: var(--element-gap); }
+
+/* Sections 2–3: same RTL split as the hero — text RIGHT, shape (+icon) LEFT. */
+.cstl-side__inner { display: grid; grid-template-columns: 1fr; gap: var(--spacing-36); width: 100%; align-items: center; }
+.cstl-side__text { display: flex; flex-direction: column; gap: var(--spacing-18); }
+.cstl-side__text .eyebrow { margin-bottom: 0; }
+
+@media (min-width: 900px) {
+  /* RTL: first grid item lands on the RIGHT -> text RIGHT, particles LEFT. */
+  .cstl-hero__inner { grid-template-columns: 0.95fr 1.05fr; align-items: center; }
+  .cstl-side__inner { grid-template-columns: 0.95fr 1.05fr; }
+}
+
+/* Back-to-top — bottom inline-end (screen-LEFT in RTL), pill geometry. */
+.to-top {
+  position: fixed;
+  bottom: var(--spacing-24);
+  inset-inline-end: var(--spacing-24);
+  width: 48px; height: 48px;
+  display: grid; place-items: center;
+  background: var(--color-void);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-buttons);
+  color: var(--color-ash);
+  font-size: var(--text-subheading);
+  z-index: 140;
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease,
+              border-color 0.18s ease, color 0.18s ease;
+}
+.to-top.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.to-top:hover { border-color: var(--color-plum-voltage); color: var(--color-bone); }
+
+/* ---- Motion preferences --------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
